@@ -132,7 +132,7 @@ void REXDRListenerHandler::ProcessLinkDestroy(REXDR::Listener::Link::Handle link
 void REXDRListenerHandler::RegisterMessagesToDispatcher()
 {
 	// 
-	REXDR::Dispatcher::SetResourceHandler(dispatcher_, "/request/type1", 
+	//REXDR::Dispatcher::SetResourceHandler(dispatcher_, "/request/type1", 
 }
 
 void __stdcall REXDRListenerHandler::OnAcceptHandler(REXDR::Listener::Link::Handle link, void* context)
