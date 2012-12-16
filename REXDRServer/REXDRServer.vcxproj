@@ -97,7 +97,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%XLIBPATH%\REXDR\include;%XLIBPATH%\XBase\include;%XLIBPATH%\Log4X\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(XLIBPATH)\REXDR\include;$(XLIBPATH)\XBase\include;$(XLIBPATH)\Log4X\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <DebugInformationFormat>OldStyle</DebugInformationFormat>
@@ -106,7 +106,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>%XLIBPATH%\REXDR\lib;%XLIBPATH%\XBase\lib;%XLIBPATH%\Log4X\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(XLIBPATH)\REXDR\lib;$(XLIBPATH)\XBase\lib;$(XLIBPATH)\Log4X\lib;$(XLIBPATH)\MRSConnector\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <DelayLoadDLLs>MRSConnectorD.dll</DelayLoadDLLs>
     </Link>
   </ItemDefinitionGroup>
@@ -134,7 +134,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%XLIBPATH%\REXDR\include;%XLIBPATH%\XBase\include;%XLIBPATH%\Log4X\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(XLIBPATH)\REXDR\include;$(XLIBPATH)\XBase\include;$(XLIBPATH)\Log4X\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ProgramDataBaseFileName>$(IntDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -143,7 +143,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>%XLIBPATH%\REXDR\lib;%XLIBPATH%\XBase\lib;%XLIBPATH%\Log4X\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(XLIBPATH)\REXDR\lib;$(XLIBPATH)\XBase\lib;$(XLIBPATH)\Log4X\lib;$(XLIBPATH)\MRSConnector\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <DelayLoadDLLs>MRSConnector.dll</DelayLoadDLLs>
       <AdditionalOptions>/Delay:UNLOAD %(AdditionalOptions)</AdditionalOptions>
     </Link>
