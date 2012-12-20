@@ -4,17 +4,17 @@
 
   <Loggers>
     <Logger Name="DebugLogger" LogLevel="All"/>
-    <Logger Name="ReleaseLogger" LogLevel="Warning"/>
+    <Logger Name="ReleaseLogger" LogLevel="All"/>
   </Loggers>
 
   <Appenders>
     <Appender Name="FileAppender" Type="Log4XBasic.DailyRollingFileAppender">
-      <AppenderParameter Name="LoggingDirectory" Value=".\Log"/>
+      <AppenderParameter Name="LoggingDirectory" Value=".\Log\" />
       <AppenderParameter Name="Schedule" Value="Hourly"/>
-      <AppenderParameter Name="FileNamePrefix" Value="REXDRServer_"/>
-      <AppenderParameter Name="FileNamePostfix" Value=".log"/>
-      <AppenderParameter Name="ImmediateFlush" Value="false"/>
-      <AppenderParameter Name="Append" Value="true"/>
+      <AppenderParameter Name="FileNamePrefix" Value="REXDRServer_" />
+      <AppenderParameter Name="FileNamePostfix" Value=".log" />
+      <AppenderParameter Name="ImmediateFlush" Value="true" />
+      <AppenderParameter Name="Append" Value="false"/>
     </Appender>
     <Appender Name="ConsoleAppender" Type="Log4XBasic.ConsoleAppender"/> 
   </Appenders>

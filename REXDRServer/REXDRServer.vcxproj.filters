@@ -1,33 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="REXDRListenerHandler.cpp">
       <Filter>sources</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="Log4XWrapper.cpp" />
+    <ClCompile Include="Log4XWrapper.cpp">
+      <Filter>Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
     <ClInclude Include="REXDR_CS_Messages.h">
       <Filter>message</Filter>
     </ClInclude>
     <ClInclude Include="REXDRListenerHandler.h">
       <Filter>sources</Filter>
     </ClInclude>
-    <ClInclude Include="Log4XWrapper.h" />
+    <ClInclude Include="Log4XWrapper.h">
+      <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>meta</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>meta</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReadMe.txt" />
     <None Include="REXDR_CS_Messages.b">
       <Filter>message</Filter>
     </None>
     <None Include="REXDRServerLog4X.xml">
       <Filter>Logger</Filter>
+    </None>
+    <None Include="ReadMe.txt">
+      <Filter>meta</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +51,9 @@
     </Filter>
     <Filter Include="Logger">
       <UniqueIdentifier>{b7bee12b-a5a5-43f8-bdeb-9983ded4e201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="meta">
+      <UniqueIdentifier>{fbc6d2fa-22f1-4da5-884d-1354017d5f79}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

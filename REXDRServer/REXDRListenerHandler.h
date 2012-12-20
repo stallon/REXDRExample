@@ -19,7 +19,6 @@ public:
 	bool CreateListenerHandle();
 	bool StartListener();
 	bool StopListener();
-	void WaitListenerForStop();
 
 	// functions for Listener's internal properties
 	size_t GetKeepAliveTimeout() const;
@@ -41,7 +40,6 @@ private:
 	REXDR::Dispatcher::Handle dispatcher_;
 
 	bool isListenerStopped;
-	HANDLE hEventStop;
 
 private:
 	void RegisterMessagesToDispatcher();

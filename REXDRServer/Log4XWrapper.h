@@ -5,23 +5,15 @@
 class Log4XWrapper
 {
 public:
-	enum LogLevel { LL_EMERG,
-					LL_ALERT,
-				    LL_FATAL,
-					LL_ERROR,
-					LL_WARNING,
-					LL_NOTICE,
-					LL_INFO,
-					LL_DEBUG,
-					LL_TRACE };
-
 	Log4XWrapper(const TCHAR* logNamespace, const TCHAR* configFilename, const TCHAR* loggerName);
 	virtual ~Log4XWrapper(void);
 
 	bool IsLoggerEnabled() const;
-	LogLevel GetLoggerLevel() const;
+	Log4X::Handle& GetLoggerHandle();
+	Log4X::LogLevel::Type GetLoggerLevel() const;
 
-
+	void Log(Log4X::LogLevel::Type loglevel, const TCHAR* message);
+	void LogFormat(Log4X::LogLevel::Type loglevel, const TCHAR* format, ...);
 
 
 private:
