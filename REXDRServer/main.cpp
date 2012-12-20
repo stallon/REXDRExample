@@ -3,9 +3,12 @@
 
 #include "stdafx.h"
 #include "REXDRListenerHandler.h"
+#include <Log4X/Log4X.h>
 
 #define HTTP_LISTENER_ID	13400
 #define	LISTEN_PORT			13403
+#define LOG4X_NAMESPACE		_T("REXDRServerLog4X")
+
 
 unsigned __stdcall stopHandler(void* arg)
 {
@@ -23,20 +26,50 @@ unsigned __stdcall stopHandler(void* arg)
 	return 0;
 }
 
+void Log(
 int _tmain(int argc, _TCHAR* argv[])
 {
+	// Initialize Log4X
+	Log4X::Handle hLog4X = NULL;
+
+	if ( !Log4X::Initialize(LOG4X_NAMESPACE, _T("REXDRServerLog4X.xml")) )
+	{
+		printf(">>> [REXDRServer: main.cpp] Log4X Initialization Failed. \n");
+	}
+	else
+	{
+#ifdef _DEBUG
+		hLog4X = Log4X::GetLogger(LOG4X_NAMESPACE, _T("DebugLogger"));
+#else
+		hLog4X = Log4X::GetLogger(LOG4X_NAMESPACE, _T("ReleaseLogger));
+#endif
+	}
+
+
 	// REXDRServer Initialization
 	REXDRListenerHandler httpHandler(HTTP_LISTENER_ID, REXDR::Listener::TRANSPORT_TCP, LISTEN_PORT);
 
 	if ( false == httpHandler.CreateListenerHandle() )
 	{
-		printf(">>> %s: REXDR Listener NOT Created. Exit...\n", __FUNCTION__);
+		Log4X::GetLoggerLevel(
+		Log4X::Error(hLog4X, 
+		printf("%s: REXDR Listener NOT Created. Exit...\n", __FUNCTION__);
 		return -1;
 	}
 
+	// REXDRServer property settings in advance to starting it.
+	if ( NULL != hLog4X ) 
+	{
+		httpHandler.SetLogger(hLog4X);
+	}
+
+	httpHandler.SetKeepAliveTimeout( 120 * 1000 );	// keepalive timeout is 2 minutes.
+
+
+	// Start a REXDRServer
 	if ( false == httpHandler.StartListener() )
 	{
-		printf(">>> %s: REXDR Listener NOT Started. Exit...\n", __FUNCTION__);
+		
 		return -1;
 	}
 
@@ -45,6 +78,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	// Wait until REXDRListenerHandler::StopListener is called by any thread
 	httpHandler.WaitListenerForStop();
+	Log4X::Uninitialize(LOG4X_NAMESPACE);
 
 	return 0;
 }

@@ -11,13 +11,21 @@ public:
 	REXDRListenerHandler(int handlerId, REXDR::Listener::TransportType type, uint16_t port);
 	virtual ~REXDRListenerHandler(void);
 
+	// functions for Listener Identity
 	REXDR::Listener::Handle GetListenerHandle() const;
 	int GetListenerHandlerId() const;
 
+	// functions for Listener behavior
 	bool CreateListenerHandle();
 	bool StartListener();
 	bool StopListener();
 	void WaitListenerForStop();
+
+	// functions for Listener's internal properties
+	size_t GetKeepAliveTimeout() const;
+	void SetKeepAliveTimeout(size_t timeInMillisecond);
+	void SetLogger(Log4X::Handle logger);
+
 
 	// Event Handlers
 	virtual void ProcessAccept(REXDR::Listener::Link::Handle link);

@@ -150,15 +150,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+    <None Include="REXDRServerLog4X.xml" />
     <None Include="REXDR_CS_Messages.b" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Log4XWrapper.h" />
     <ClInclude Include="REXDRListenerHandler.h" />
     <ClInclude Include="REXDR_CS_Messages.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Log4XWrapper.cpp" />
     <ClCompile Include="REXDRListenerHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">

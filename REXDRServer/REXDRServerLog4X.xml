@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Log4XConfig xmlns="http://www.nhncorp.com/xgp/Log4XConfig.xsd">
+  <Log4X ServiceName="REXDRServer"/>
+
+  <Loggers>
+    <Logger Name="DebugLogger" LogLevel="All"/>
+    <Logger Name="ReleaseLogger" LogLevel="Warning"/>
+  </Loggers>
+
+  <Appenders>
+    <Appender Name="FileAppender" Type="Log4XBasic.DailyRollingFileAppender">
+      <AppenderParameter Name="LoggingDirectory" Value=".\Log"/>
+      <AppenderParameter Name="Schedule" Value="Hourly"/>
+      <AppenderParameter Name="FileNamePrefix" Value="REXDRServer_"/>
+      <AppenderParameter Name="FileNamePostfix" Value=".log"/>
+      <AppenderParameter Name="ImmediateFlush" Value="false"/>
+      <AppenderParameter Name="Append" Value="true"/>
+    </Appender>
+    <Appender Name="ConsoleAppender" Type="Log4XBasic.ConsoleAppender"/> 
+  </Appenders>
+
+  <Layouts>
+    <Layout Name="Basic" Type="Log4XBasic.BasicLayout"></Layout>
+  </Layouts>
+
+  <LoggerBindings>
+    <LoggerBinding LoggerRef="DebugLogger">
+      <AppenderRef Name="ConsoleAppender"/>
+    </LoggerBinding>
+    <LoggerBinding LoggerRef="ReleaseLogger">
+      <AppenderRef Name="FileAppender"/>
+    </LoggerBinding>
+  </LoggerBindings>
+
+  <AppenderBindings>
+    <AppenderBinding AppenderRef="FileAppender">
+      <LayoutRef Name="Basic"/>
+    </AppenderBinding>
+    <AppenderBinding AppenderRef="ConsoleAppender">
+      <LayoutRef Name="Basic"/>
+    </AppenderBinding>
+  </AppenderBindings>
+</Log4XConfig>

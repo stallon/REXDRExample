@@ -8,6 +8,7 @@
     <ClCompile Include="main.cpp">
       <Filter>sources</Filter>
     </ClCompile>
+    <ClCompile Include="Log4XWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h" />
@@ -18,11 +19,15 @@
     <ClInclude Include="REXDRListenerHandler.h">
       <Filter>sources</Filter>
     </ClInclude>
+    <ClInclude Include="Log4XWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
     <None Include="REXDR_CS_Messages.b">
       <Filter>message</Filter>
+    </None>
+    <None Include="REXDRServerLog4X.xml">
+      <Filter>Logger</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +36,9 @@
     </Filter>
     <Filter Include="message">
       <UniqueIdentifier>{018a8bf9-adc5-432c-b3f9-14dac06f01ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger">
+      <UniqueIdentifier>{b7bee12b-a5a5-43f8-bdeb-9983ded4e201}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

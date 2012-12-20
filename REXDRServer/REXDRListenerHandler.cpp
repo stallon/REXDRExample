@@ -99,6 +99,23 @@ void REXDRListenerHandler::WaitListenerForStop()
 }
 
 
+size_t REXDRListenerHandler::GetKeepAliveTimeout() const
+{
+	return REXDR::Listener::GetKeepAliveTimeout(listener_);
+}
+
+
+void REXDRListenerHandler::SetKeepAliveTimeout(size_t timeInMillisecond)
+{
+	REXDR::Listener::SetKeepAliveTimeout(listener_, timeInMillisecond);
+}
+
+
+void REXDRListenerHandler::SetLogger(Log4X::Handle logger)
+{
+	REXDR::Listener::SetLogger(logger);
+}
+
 void REXDRListenerHandler::ProcessAccept(REXDR::Listener::Link::Handle link)
 {
 	const char* remoteAddr = REXDR::Listener::Link::GetRemoteAddress(link);
