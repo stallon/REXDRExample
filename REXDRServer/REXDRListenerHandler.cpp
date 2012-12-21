@@ -1,11 +1,9 @@
 #include "StdAfx.h"
 #include "REXDRListenerHandler.h"
-#include "Log4XWrapper.h"
 
-extern Log4XWrapper gLogger;
 
 REXDRListenerHandler::REXDRListenerHandler(int handlerId, REXDR::Listener::TransportType type, uint16_t port) : 
-	id_(handlerId), transportType_(type), port_(port), listener_(NULL), isListenerStopped(true)
+	id_(handlerId), transportType_(type), port_(port), listener_(NULL), isListenerStopped(true), logger_(NULL)
 {
 
 }
@@ -18,9 +16,9 @@ REXDRListenerHandler::~REXDRListenerHandler(void)
 		REXDR::Listener::Stop(listener_);
 	}
 	
-	if ( gLogger.IsLoggerEnabled() && gLogger.GetLoggerLevel() <= Log4X::LogLevel::Debug )
+	if ( logger_->IsLoggerEnabled() && logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
 	{
-		gLogger.Log(Log4X::LogLevel::Debug, _T("~REXDRListenerHandler(): Listener is being destroyed."));
+		logger_->Log(Log4X::LogLevel::Debug, _T("~REXDRListenerHandler(): Listener is being destroyed."));
 	}
 
 	REXDR::Dispatcher::DestroyHandle(dispatcher_);
@@ -45,9 +43,9 @@ bool REXDRListenerHandler::CreateListenerHandle()
 
 		if ( NULL != listener_ )
 		{
-			if ( gLogger.GetLoggerLevel() <= Log4X::LogLevel::Debug )
+			if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
 			{
-				gLogger.LogFormat(Log4X::LogLevel::Debug, _T("REXDRListener is created and listening at %d"), port_);
+				logger_->LogFormat(Log4X::LogLevel::Debug, _T("REXDRListener is created and listening at %d"), port_);
 			}
 
 			// REXDR Dispatcher 생성. Dispatcher는 REXDRListener의 lifecycle과 같은게 좋을듯.
@@ -58,9 +56,9 @@ bool REXDRListenerHandler::CreateListenerHandle()
 		}
 	}
 
-	if ( gLogger.GetLoggerLevel() <= Log4X::LogLevel::Fatal )
+	if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Fatal )
 	{
-		gLogger.Log(Log4X::LogLevel::Fatal, _T("New listener COULD NOT be created."));
+		logger_->Log(Log4X::LogLevel::Fatal, _T("New listener COULD NOT be created."));
 	}
 	return false;
 }
@@ -79,17 +77,17 @@ bool REXDRListenerHandler::StartListener()
 		if ( REXDR::Listener::Start(listener_) )
 		{
 			isListenerStopped = false;
-			if ( gLogger.GetLoggerLevel() <= Log4X::LogLevel::Debug )
+			if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
 			{
-				gLogger.LogFormat(Log4X::LogLevel::Debug, _T("REXDRListener (Id:%d) is starting"), id_);
+				logger_->LogFormat(Log4X::LogLevel::Debug, _T("REXDRListener (Id:%d) is starting"), id_);
 			}
 			return true;
 		}
 	}
 
-	if ( gLogger.GetLoggerLevel() <= Log4X::LogLevel::Fatal )
+	if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Fatal )
 	{
-		gLogger.Log(Log4X::LogLevel::Fatal, _T("Failed to start REXDRListener"));
+		logger_->Log(Log4X::LogLevel::Fatal, _T("Failed to start REXDRListener"));
 	}
 	return false;
 }
@@ -100,17 +98,17 @@ bool REXDRListenerHandler::StopListener()
 	if ( NULL != listener_ && !isListenerStopped &&
 		 REXDR::Listener::Stop(listener_) )
 	{
-		if ( gLogger.GetLoggerLevel() <= Log4X::LogLevel::Debug )
+		if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
 		{
-			gLogger.Log(Log4X::LogLevel::Debug, _T("Listener successfully stopped."));
+			logger_->Log(Log4X::LogLevel::Debug, _T("Listener successfully stopped."));
 		}
 
 		return true;
 	}
 
-	if ( gLogger.GetLoggerLevel() <= Log4X::LogLevel::Error )
+	if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Error )
 	{
-		gLogger.Log(Log4X::LogLevel::Error, _T("Failed to stop REXDRListener"));
+		logger_->Log(Log4X::LogLevel::Error, _T("Failed to stop REXDRListener"));
 	}
 	return false;
 
@@ -128,18 +126,19 @@ void REXDRListenerHandler::SetKeepAliveTimeout(size_t timeInMillisecond)
 }
 
 
-void REXDRListenerHandler::SetLogger(Log4X::Handle logger)
+void REXDRListenerHandler::SetLogger(Log4XWrapper* logger)
 {
-	REXDR::Listener::SetLogger(logger);
+	logger_ = logger;
+	REXDR::Listener::SetLogger(logger_->GetLoggerHandle());
 }
 
 void REXDRListenerHandler::ProcessAccept(REXDR::Listener::Link::Handle link)
 {
 	const char* remoteAddr = REXDR::Listener::Link::GetRemoteAddress(link);
 
-	if ( gLogger.GetLoggerLevel() <= Log4X::LogLevel::Debug )
+	if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
 	{
-		gLogger.LogFormat(Log4X::LogLevel::Debug, _T("A new client is accepted from %s"), remoteAddr);
+		logger_->LogFormat(Log4X::LogLevel::Debug, _T("A new client is accepted from %s"), remoteAddr);
 	}
 
 	REXDR::Listener::Link::SetContext(link, (void*)remoteAddr, REXDRListenerHandler::OnLinkDestroyHandler, this);
@@ -150,9 +149,9 @@ void REXDRListenerHandler::ProcessClose(REXDR::Listener::Link::Handle link)
 {
 	const char* remoteAddr = (const char*)REXDR::Listener::Link::GetContext(link);
 
-	if ( gLogger.GetLoggerLevel() <= Log4X::LogLevel::Debug )
+	if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
 	{
-		gLogger.LogFormat(Log4X::LogLevel::Debug, _T("A client@%s is closing."), remoteAddr);
+		logger_->LogFormat(Log4X::LogLevel::Debug, _T("A client@%s is closing."), remoteAddr);
 	}
 }
 
@@ -167,9 +166,9 @@ void REXDRListenerHandler::ProcessLinkDestroy(REXDR::Listener::Link::Handle link
 {
 	const char* remoteAddr = (const char*)REXDR::Listener::Link::GetContext(link);
 
-	if ( gLogger.GetLoggerLevel() <= Log4X::LogLevel::Debug )
+	if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
 	{
-		gLogger.LogFormat(Log4X::LogLevel::Debug, _T("A client@%s is destroyed."), remoteAddr);
+		logger_->LogFormat(Log4X::LogLevel::Debug, _T("A client@%s is destroyed."), remoteAddr);
 	}
 }
 

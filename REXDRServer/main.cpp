@@ -3,7 +3,7 @@
 
 #include "stdafx.h"
 #include "REXDRListenerHandler.h"
-#include "Log4XWrapper.h"
+#include "../Common/Log4XWrapper.h"
 
 #define HTTP_LISTENER_ID	13400
 #define	LISTEN_PORT			13403
@@ -16,8 +16,7 @@
 #define	LOGGER_NAME			_T("ReleaseLogger")
 #endif
 
-// define global logger
-Log4XWrapper gLogger(LOG4X_NAMESPACE, LOG4X_CONFIGFILE, LOGGER_NAME);
+
 
 unsigned __stdcall stopHandler(void* arg)
 {
@@ -38,17 +37,23 @@ unsigned __stdcall stopHandler(void* arg)
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	// define global logger
+	Log4XWrapper gLogger(LOG4X_NAMESPACE, LOG4X_CONFIGFILE, LOGGER_NAME);
+
 	if ( !gLogger.IsLoggerEnabled() )
 	{
 		printf(">>> [REXDRServer: main.cpp] Log4X Initialization Failed. \n");
 		return -1;
 	}
 
-	// Initialize Server-Loop Waiting Event
-	HANDLE hWaitEvent = ::CreateEvent(NULL, FALSE, FALSE, NULL);
-
 	// REXDRServer Initialization
 	REXDRListenerHandler httpHandler(HTTP_LISTENER_ID, REXDR::Listener::TRANSPORT_TCP, LISTEN_PORT);
+	
+	// Logger Setting for REXDRServer
+	if ( gLogger.IsLoggerEnabled() ) 
+	{
+		httpHandler.SetLogger(&gLogger);
+	}
 
 	if ( false == httpHandler.CreateListenerHandle() )
 	{
@@ -59,14 +64,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		return -1;
 	}
 
-	// REXDRServer property settings in advance to starting it.
-	if ( gLogger.IsLoggerEnabled() ) 
-	{
-		httpHandler.SetLogger(gLogger.GetLoggerHandle());
-	}
-
-	httpHandler.SetKeepAliveTimeout( 120 * 1000 );	// keepalive timeout is 2 minutes.
-
+	httpHandler.SetKeepAliveTimeout( 60 * 1000 );	// keepalive timeout is 1 minutes.
 
 	// Start a REXDRServer
 	if ( false == httpHandler.StartListener() )
@@ -74,6 +72,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		
 		return -1;
 	}
+
+		// Initialize Server-Loop Waiting Event
+	HANDLE hWaitEvent = ::CreateEvent(NULL, FALSE, FALSE, NULL);
 
 	// Thread for graceful stop
 	_beginthreadex(NULL, 0, stopHandler, &hWaitEvent, 0, NULL);

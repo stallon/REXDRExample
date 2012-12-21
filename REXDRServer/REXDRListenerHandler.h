@@ -1,6 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "../Common/Log4XWrapper.h"
 #include <REXDR/REXDRListenerAPI.h>
 #include <REXDR/REXDRDispatcherAPI.h>
 
@@ -23,7 +24,7 @@ public:
 	// functions for Listener's internal properties
 	size_t GetKeepAliveTimeout() const;
 	void SetKeepAliveTimeout(size_t timeInMillisecond);
-	void SetLogger(Log4X::Handle logger);
+	void SetLogger(Log4XWrapper* logger);
 
 
 	// Event Handlers
@@ -38,6 +39,7 @@ private:
 	uint16_t port_;
 	REXDR::Listener::Handle	listener_;
 	REXDR::Dispatcher::Handle dispatcher_;
+	Log4XWrapper* logger_;
 
 	bool isListenerStopped;
 

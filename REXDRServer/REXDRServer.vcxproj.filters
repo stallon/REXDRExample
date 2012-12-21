@@ -7,22 +7,16 @@
     <ClCompile Include="main.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="Log4XWrapper.cpp">
-      <Filter>Logger</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>meta</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common\Log4XWrapper.cpp">
+      <Filter>Logger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="REXDR_CS_Messages.h">
-      <Filter>message</Filter>
-    </ClInclude>
     <ClInclude Include="REXDRListenerHandler.h">
       <Filter>sources</Filter>
-    </ClInclude>
-    <ClInclude Include="Log4XWrapper.h">
-      <Filter>Logger</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>meta</Filter>
@@ -30,16 +24,22 @@
     <ClInclude Include="targetver.h">
       <Filter>meta</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\Log4XWrapper.h">
+      <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\REXDR_CS_Messages.h">
+      <Filter>message</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="REXDR_CS_Messages.b">
-      <Filter>message</Filter>
-    </None>
-    <None Include="REXDRServerLog4X.xml">
-      <Filter>Logger</Filter>
-    </None>
     <None Include="ReadMe.txt">
       <Filter>meta</Filter>
+    </None>
+    <None Include="..\Common\REXDRServerLog4X.xml">
+      <Filter>Logger</Filter>
+    </None>
+    <None Include="..\Common\REXDR_CS_Messages.b">
+      <Filter>message</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
