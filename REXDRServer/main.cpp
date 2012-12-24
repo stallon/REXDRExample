@@ -3,13 +3,13 @@
 
 #include "stdafx.h"
 #include "REXDRListenerHandler.h"
-#include "../Common/Log4XWrapper.h"
+#include "Log4XWrapper.h"
 
 #define HTTP_LISTENER_ID	13400
 #define	LISTEN_PORT			13403
 
-#define LOG4X_NAMESPACE		_T("REXDRServerLog4X")
-#define LOG4X_CONFIGFILE	_T("REXDRServerLog4X.xml")
+#define LOG4X_NAMESPACE		_T("REXDRClientServerLog4X")
+#define LOG4X_CONFIGFILE	_T("REXDRClientServerLog4X.xml")
 #ifdef _DEBUG
 #define LOGGER_NAME			_T("DebugLogger")
 #else

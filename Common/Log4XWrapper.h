@@ -1,6 +1,8 @@
 #pragma once
 
+#include <tchar.h>
 #include <Log4X/Log4X.h>
+
 
 class Log4XWrapper
 {

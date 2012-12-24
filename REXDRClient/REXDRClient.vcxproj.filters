@@ -13,24 +13,48 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="meta">
+      <UniqueIdentifier>{32731853-607e-4ef8-954f-a9e48b5c3376}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="message">
+      <UniqueIdentifier>{e4bc3877-a135-44e6-9deb-7e1e59d9c1cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger">
+      <UniqueIdentifier>{ae31e90e-9c49-48fc-9cdf-6a2e0ec7b68a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
+    <None Include="..\Common\REXDR_CS_Messages.b">
+      <Filter>message</Filter>
+    </None>
+    <None Include="..\Common\REXDRClientServerLog4X.xml">
+      <Filter>Logger</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>meta</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>meta</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\REXDR_CS_Messages.h">
+      <Filter>message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Log4XWrapper.h">
+      <Filter>Logger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="ClientMain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="REXDRClient.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>meta</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Log4XWrapper.cpp">
+      <Filter>Logger</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

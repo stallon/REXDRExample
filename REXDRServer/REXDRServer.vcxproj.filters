@@ -35,11 +35,11 @@
     <None Include="ReadMe.txt">
       <Filter>meta</Filter>
     </None>
-    <None Include="..\Common\REXDRServerLog4X.xml">
-      <Filter>Logger</Filter>
-    </None>
     <None Include="..\Common\REXDR_CS_Messages.b">
       <Filter>message</Filter>
+    </None>
+    <None Include="..\Common\REXDRClientServerLog4X.xml">
+      <Filter>Logger</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

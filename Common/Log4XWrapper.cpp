@@ -1,5 +1,6 @@
-#include "StdAfx.h"
 #include "Log4XWrapper.h"
+#include <stdio.h>
+#include <Windows.h>
 #include <stdarg.h>
 
 Log4XWrapper::Log4XWrapper(const TCHAR* logNamespace, const TCHAR* configFilename, const TCHAR* loggerName)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Log4XConfig xmlns="http://www.nhncorp.com/xgp/Log4XConfig.xsd">
-  <Log4X ServiceName="REXDRServer"/>
+  <Log4X ServiceName="REXDRClientServer"/>
 
   <Loggers>
     <Logger Name="DebugLogger" LogLevel="All"/>
