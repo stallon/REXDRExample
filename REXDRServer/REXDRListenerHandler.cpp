@@ -16,7 +16,7 @@ REXDRListenerHandler::~REXDRListenerHandler(void)
 		REXDR::Listener::Stop(listener_);
 	}
 	
-	if ( logger_->IsLoggerEnabled() && logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
+	if ( logger_->IsLoggerEnabled() && logger_->IsDebugEnabled() )
 	{
 		logger_->Log(Log4X::LogLevel::Debug, _T("~REXDRListenerHandler(): Listener is being destroyed."));
 	}
@@ -43,7 +43,7 @@ bool REXDRListenerHandler::CreateListenerHandle()
 
 		if ( NULL != listener_ )
 		{
-			if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
+			if ( logger_->IsDebugEnabled() )
 			{
 				logger_->LogFormat(Log4X::LogLevel::Debug, _T("REXDRListener is created and listening at %d"), port_);
 			}
@@ -56,7 +56,7 @@ bool REXDRListenerHandler::CreateListenerHandle()
 		}
 	}
 
-	if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Fatal )
+	if ( logger_->IsFatalEnabled() )
 	{
 		logger_->Log(Log4X::LogLevel::Fatal, _T("New listener COULD NOT be created."));
 	}
@@ -77,7 +77,7 @@ bool REXDRListenerHandler::StartListener()
 		if ( REXDR::Listener::Start(listener_) )
 		{
 			isListenerStopped = false;
-			if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
+			if ( logger_->IsDebugEnabled() )
 			{
 				logger_->LogFormat(Log4X::LogLevel::Debug, _T("REXDRListener (Id:%d) is starting"), id_);
 			}
@@ -85,7 +85,7 @@ bool REXDRListenerHandler::StartListener()
 		}
 	}
 
-	if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Fatal )
+	if ( logger_->IsFatalEnabled() )
 	{
 		logger_->Log(Log4X::LogLevel::Fatal, _T("Failed to start REXDRListener"));
 	}
@@ -98,7 +98,7 @@ bool REXDRListenerHandler::StopListener()
 	if ( NULL != listener_ && !isListenerStopped &&
 		 REXDR::Listener::Stop(listener_) )
 	{
-		if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
+		if ( logger_->IsDebugEnabled() )
 		{
 			logger_->Log(Log4X::LogLevel::Debug, _T("Listener successfully stopped."));
 		}
@@ -106,7 +106,7 @@ bool REXDRListenerHandler::StopListener()
 		return true;
 	}
 
-	if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Error )
+	if ( logger_->IsErrorEnabled() )
 	{
 		logger_->Log(Log4X::LogLevel::Error, _T("Failed to stop REXDRListener"));
 	}
@@ -136,7 +136,7 @@ void REXDRListenerHandler::ProcessAccept(REXDR::Listener::Link::Handle link)
 {
 	const char* remoteAddr = REXDR::Listener::Link::GetRemoteAddress(link);
 
-	if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
+	if ( logger_->IsDebugEnabled() )
 	{
 		logger_->LogFormat(Log4X::LogLevel::Debug, _T("A new client is accepted from %s"), remoteAddr);
 	}
@@ -149,7 +149,7 @@ void REXDRListenerHandler::ProcessClose(REXDR::Listener::Link::Handle link)
 {
 	const char* remoteAddr = (const char*)REXDR::Listener::Link::GetContext(link);
 
-	if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
+	if ( logger_->IsDebugEnabled() )
 	{
 		logger_->LogFormat(Log4X::LogLevel::Debug, _T("A client@%s is closing."), remoteAddr);
 	}
@@ -166,7 +166,7 @@ void REXDRListenerHandler::ProcessLinkDestroy(REXDR::Listener::Link::Handle link
 {
 	const char* remoteAddr = (const char*)REXDR::Listener::Link::GetContext(link);
 
-	if ( logger_->GetLoggerLevel() <= Log4X::LogLevel::Debug )
+	if ( logger_->IsDebugEnabled() )
 	{
 		logger_->LogFormat(Log4X::LogLevel::Debug, _T("A client@%s is destroyed."), remoteAddr);
 	}

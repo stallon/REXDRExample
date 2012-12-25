@@ -56,6 +56,52 @@ Log4X::LogLevel::Type Log4XWrapper::GetLoggerLevel() const
 }
 
 
+bool Log4XWrapper::IsEmergEnabled() const
+{
+	return Log4X::GetLoggerLevel(hLogger_) <= Log4X::LogLevel::Emerg;
+}
+
+bool Log4XWrapper::IsAlertEnabled() const
+{
+	return Log4X::GetLoggerLevel(hLogger_) <= Log4X::LogLevel::Alert;
+}
+
+bool Log4XWrapper::IsFatalEnabled() const
+{
+	return Log4X::GetLoggerLevel(hLogger_) <= Log4X::LogLevel::Fatal;
+}
+
+bool Log4XWrapper::IsErrorEnabled() const
+{
+	return Log4X::GetLoggerLevel(hLogger_) <= Log4X::LogLevel::Error;
+}
+
+bool Log4XWrapper::IsWarningEnabled() const
+{
+	return Log4X::GetLoggerLevel(hLogger_) <= Log4X::LogLevel::Warning;
+}
+
+bool Log4XWrapper::IsInfoEnabled() const
+{
+	return Log4X::GetLoggerLevel(hLogger_) <= Log4X::LogLevel::Info;
+}
+
+bool Log4XWrapper::IsNoticeEnabled() const
+{
+	return Log4X::GetLoggerLevel(hLogger_) <= Log4X::LogLevel::Notice;
+}
+
+bool Log4XWrapper::IsDebugEnabled() const
+{
+	return Log4X::GetLoggerLevel(hLogger_) <= Log4X::LogLevel::Debug;
+}
+
+bool Log4XWrapper::IsTraceEnabled() const
+{
+	return Log4X::GetLoggerLevel(hLogger_) <= Log4X::LogLevel::Trace;
+}
+
+
 void Log4XWrapper::Log(Log4X::LogLevel::Type loglevel, const TCHAR* message)
 {
 	if ( !isAvailable )

@@ -4,14 +4,14 @@
     <ClCompile Include="REXDRListenerHandler.cpp">
       <Filter>sources</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>sources</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>meta</Filter>
     </ClCompile>
     <ClCompile Include="..\Common\Log4XWrapper.cpp">
       <Filter>Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerMain.cpp">
+      <Filter>sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -35,11 +35,18 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	if ( !gLogger.IsLoggerEnabled() )
 	{
-		printf(">>> [REXDRServer: main.cpp] Log4X Initialization Failed. \n");
+		printf(">>> [%s] Log4X Initialization Failed. \n", __FUNCTION__);
 		return -1;
 	}
 
-	REXDR::Connector::Handle hConnector = REXDR::Connector::CreateHandle(REXDR::Connector::TRANSPORT_TCP, SERVER_IP, SERVER_PORT, 
+	REXDR::Connector::Handle hConnector = REXDR::Connector::CreateHandle(REXDR::Connector::TRANSPORT_TCP, SERVER_IP, SERVER_PORT, 10*1000);
+	if ( NULL == hConnector )
+	{
+		printf(">>> [%s] REXDRConnector can't be created.\n", __FUNCTION__);
+		return -1;
+	}
+
+
 
 
 

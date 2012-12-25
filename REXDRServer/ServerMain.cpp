@@ -57,7 +57,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	if ( false == httpHandler.CreateListenerHandle() )
 	{
-		if ( gLogger.GetLoggerLevel() <= Log4X::LogLevel::Fatal )
+		if ( gLogger.IsFatalEnabled() )
 		{
 			gLogger.LogFormat(Log4X::LogLevel::Fatal, _T("%s: REXDR Listener NOT Created. Exit...\n"), __FUNCTION__);
 		}

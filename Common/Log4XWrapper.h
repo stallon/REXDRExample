@@ -14,6 +14,16 @@ public:
 	Log4X::Handle& GetLoggerHandle();
 	Log4X::LogLevel::Type GetLoggerLevel() const;
 
+	bool IsEmergEnabled() const;
+	bool IsAlertEnabled() const;
+	bool IsFatalEnabled() const;
+	bool IsErrorEnabled() const;
+	bool IsWarningEnabled() const;
+	bool IsInfoEnabled() const;
+	bool IsNoticeEnabled() const;
+	bool IsDebugEnabled() const;
+	bool IsTraceEnabled() const;
+
 	void Log(Log4X::LogLevel::Type loglevel, const TCHAR* message);
 	void LogFormat(Log4X::LogLevel::Type loglevel, const TCHAR* format, ...);
 
