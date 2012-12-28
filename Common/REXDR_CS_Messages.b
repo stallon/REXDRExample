@@ -1,17 +1,38 @@
-@request(GET, "/stallon/request1/${userId:string}/${sessionid:uint32_t}")
-class GetUserStatus
+@request(GET, "/stallon/usersession/${userid:string}")
+class QueryUserSessionStatus
 {
 
 };
 
 
-@response ( request = GetUserStatus )
-class UserStatusResponse
+@response
+class QueryUserSessionStatusResponse
 {
+	string userid;
 	uint32_t sessionid;
-
-	string userId;
-	string gameId;
-	string channelId;
-	int32_t userStatus;
+	string gameid;
+	string channelid;
+	uint32_t sessionstatus;
+	uint32_t errorcode;
 };
+
+
+@request(POST, "/stallon/usersession")
+class UpdateUserSessionStatus
+{
+	string userid;
+	uint32_t sessionid;
+	string gameid;
+	string channelid;
+	string reserve;
+};
+
+
+@response
+class UpdateUserSessionStatusResponse
+{
+	string userid;
+	uint32_t sessionid;
+	uint32_t errorcode;
+};
+

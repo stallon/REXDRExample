@@ -15,6 +15,7 @@
       <AppenderParameter Name="FileNamePostfix" Value=".log" />
       <AppenderParameter Name="ImmediateFlush" Value="true" />
       <AppenderParameter Name="Append" Value="false"/>
+      <AppenderParameter Name="Encoding" Value="UTF-8"/>
     </Appender>
     <Appender Name="ConsoleAppender" Type="Log4XBasic.ConsoleAppender"/> 
   </Appenders>

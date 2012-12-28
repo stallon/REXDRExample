@@ -151,6 +151,7 @@
   <ItemGroup>
     <None Include="..\Common\REXDRClientServerLog4X.xml" />
     <None Include="..\Common\REXDR_CS_Messages.b" />
+    <None Include="..\REXDRClient\ReadMe.txt" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>

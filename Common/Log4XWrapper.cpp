@@ -3,6 +3,10 @@
 #include <Windows.h>
 #include <stdarg.h>
 
+
+namespace Common
+{
+
 Log4XWrapper::Log4XWrapper(const TCHAR* logNamespace, const TCHAR* configFilename, const TCHAR* loggerName)
 	: logNamespace_(logNamespace)
 {
@@ -102,7 +106,7 @@ bool Log4XWrapper::IsTraceEnabled() const
 }
 
 
-void Log4XWrapper::Log(Log4X::LogLevel::Type loglevel, const TCHAR* message)
+void Log4XWrapper::Log(Log4X::LogLevel::Type loglevel, const char* message)
 {
 	if ( !isAvailable )
 	{
@@ -145,14 +149,17 @@ void Log4XWrapper::Log(Log4X::LogLevel::Type loglevel, const TCHAR* message)
 }
 
 
-void Log4XWrapper::LogFormat(Log4X::LogLevel::Type loglevel, const TCHAR* format, ...)
+void Log4XWrapper::LogFormat(Log4X::LogLevel::Type loglevel, const char* format, ...)
 {
-	TCHAR message[1024];
+	char message[1024];
 
 	va_list argptr;
 	va_start(argptr, format);
-	_vstprintf_s(message, _countof(message), format, argptr);
+	vsprintf_s(message, sizeof(message), format, argptr);
 	va_end(argptr);
 	
 	this->Log(loglevel, message);
+}
+
+
 }

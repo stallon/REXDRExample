@@ -41,6 +41,7 @@
     <None Include="..\Common\REXDRClientServerLog4X.xml">
       <Filter>Logger</Filter>
     </None>
+    <None Include="..\REXDRClient\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="sources">

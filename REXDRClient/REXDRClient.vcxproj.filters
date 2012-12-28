@@ -24,7 +24,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ReadMe.txt" />
     <None Include="..\Common\REXDR_CS_Messages.b">
       <Filter>message</Filter>
     </None>
@@ -39,11 +38,17 @@
     <ClInclude Include="targetver.h">
       <Filter>meta</Filter>
     </ClInclude>
+    <ClInclude Include="..\Common\Log4XWrapper.h">
+      <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common\Helper.h">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
     <ClInclude Include="..\Common\REXDR_CS_Messages.h">
       <Filter>message</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common\Log4XWrapper.h">
-      <Filter>Logger</Filter>
+    <ClInclude Include="ServiceHandler.h">
+      <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +60,12 @@
     </ClCompile>
     <ClCompile Include="..\Common\Log4XWrapper.cpp">
       <Filter>Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common\Helper.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceHandler.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

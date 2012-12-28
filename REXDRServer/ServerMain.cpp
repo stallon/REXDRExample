@@ -8,7 +8,7 @@
 #define HTTP_LISTENER_ID	13400
 #define	LISTEN_PORT			13403
 
-#define LOG4X_NAMESPACE		_T("REXDRClientServerLog4X")
+#define LOG4X_NAMESPACE		_T("REXDRServerLog4X")
 #define LOG4X_CONFIGFILE	_T("REXDRClientServerLog4X.xml")
 #ifdef _DEBUG
 #define LOGGER_NAME			_T("DebugLogger")
@@ -38,7 +38,7 @@ unsigned __stdcall stopHandler(void* arg)
 int _tmain(int argc, _TCHAR* argv[])
 {
 	// define global logger
-	Log4XWrapper gLogger(LOG4X_NAMESPACE, LOG4X_CONFIGFILE, LOGGER_NAME);
+	Common::Log4XWrapper gLogger(LOG4X_NAMESPACE, LOG4X_CONFIGFILE, LOGGER_NAME);
 
 	if ( !gLogger.IsLoggerEnabled() )
 	{
@@ -59,7 +59,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	{
 		if ( gLogger.IsFatalEnabled() )
 		{
-			gLogger.LogFormat(Log4X::LogLevel::Fatal, _T("%s: REXDR Listener NOT Created. Exit...\n"), __FUNCTION__);
+			gLogger.LogFormat(Log4X::LogLevel::Fatal, "%s: REXDR Listener NOT Created. Exit...\n", __FUNCTION__);
 		}
 		return -1;
 	}
