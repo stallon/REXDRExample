@@ -1,6 +1,7 @@
 
 #include "StdAfx.h"
 #include "ServiceHandler.h"
+#include "Helper.h"
 
 namespace REXDRClient 
 {
