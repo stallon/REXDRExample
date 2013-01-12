@@ -106,7 +106,7 @@ bool Log4XWrapper::IsTraceEnabled() const
 }
 
 
-void Log4XWrapper::Log(Log4X::LogLevel::Type loglevel, const char* message)
+void Log4XWrapper::Log(LogLevel loglevel, const char* message)
 {
 	if ( !isAvailable )
 	{
@@ -149,7 +149,7 @@ void Log4XWrapper::Log(Log4X::LogLevel::Type loglevel, const char* message)
 }
 
 
-void Log4XWrapper::LogFormat(Log4X::LogLevel::Type loglevel, const char* format, ...)
+void Log4XWrapper::LogFormat(LogLevel loglevel, const char* format, ...)
 {
 	char message[1024];
 

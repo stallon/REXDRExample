@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="REXDRListenerHandler.cpp">
-      <Filter>sources</Filter>
+      <Filter>ServerCore</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>meta</Filter>
@@ -11,12 +11,18 @@
       <Filter>Logger</Filter>
     </ClCompile>
     <ClCompile Include="ServerMain.cpp">
-      <Filter>sources</Filter>
+      <Filter>ServerCore</Filter>
+    </ClCompile>
+    <ClCompile Include="UserSessionContainer.cpp">
+      <Filter>ServiceLogic</Filter>
+    </ClCompile>
+    <ClCompile Include="UserSessionService.cpp">
+      <Filter>ServiceLogic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="REXDRListenerHandler.h">
-      <Filter>sources</Filter>
+      <Filter>ServerCore</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>meta</Filter>
@@ -30,6 +36,12 @@
     <ClInclude Include="..\Common\REXDR_CS_Messages.h">
       <Filter>message</Filter>
     </ClInclude>
+    <ClInclude Include="UserSessionContainer.h">
+      <Filter>ServiceLogic</Filter>
+    </ClInclude>
+    <ClInclude Include="UserSessionService.h">
+      <Filter>ServiceLogic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt">
@@ -41,12 +53,8 @@
     <None Include="..\Common\REXDRClientServerLog4X.xml">
       <Filter>Logger</Filter>
     </None>
-    <None Include="..\REXDRClient\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="sources">
-      <UniqueIdentifier>{6293c29f-a4c2-4c85-890f-62b20e1e0b6a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="message">
       <UniqueIdentifier>{018a8bf9-adc5-432c-b3f9-14dac06f01ef}</UniqueIdentifier>
     </Filter>
@@ -55,6 +63,12 @@
     </Filter>
     <Filter Include="meta">
       <UniqueIdentifier>{fbc6d2fa-22f1-4da5-884d-1354017d5f79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServerCore">
+      <UniqueIdentifier>{6293c29f-a4c2-4c85-890f-62b20e1e0b6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServiceLogic">
+      <UniqueIdentifier>{f65094f5-7747-4642-80c1-f1553551732d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

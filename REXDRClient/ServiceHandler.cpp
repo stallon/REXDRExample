@@ -1,7 +1,7 @@
 
 #include "StdAfx.h"
 #include "ServiceHandler.h"
-#include "Helper.h"
+#include "UTF8Converter.h"
 
 namespace REXDRClient 
 {
@@ -91,6 +91,7 @@ bool ServiceHandler::UpdateUserSession(unsigned int sessionid, const std::string
 	update.sessionid = sessionid;
 	update.gameid = gameid;
 	update.channelid = channelid;
+	update.sessionstatus = 0;
 	update.reserve = reserve;
 
 	if ( !REXDR::Connector::Request(hConnector_, &update, (void*)this, &ServiceHandler::OnUpdateUserSessionStatusResponse ) )

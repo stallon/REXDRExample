@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "REXDRListenerHandler.h"
+#include "UserSessionService.h"
 #include "Log4XWrapper.h"
 
 #define HTTP_LISTENER_ID	13400
@@ -47,7 +48,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	// REXDRServer Initialization
-	REXDRListenerHandler httpHandler(HTTP_LISTENER_ID, REXDR::Listener::TRANSPORT_TCP, LISTEN_PORT);
+	REXDRServer::REXDRListenerHandler httpHandler(HTTP_LISTENER_ID, REXDR::Listener::TRANSPORT_TCP, LISTEN_PORT);
 	
 	// Logger Setting for REXDRServer
 	if ( gLogger.IsLoggerEnabled() ) 
@@ -59,17 +60,24 @@ int _tmain(int argc, _TCHAR* argv[])
 	{
 		if ( gLogger.IsFatalEnabled() )
 		{
-			gLogger.LogFormat(Log4X::LogLevel::Fatal, "%s: REXDR Listener NOT Created. Exit...\n", __FUNCTION__);
+			gLogger.LogFormat(LL_FATAL, "%s: REXDR Listener NOT Created. Exit...\n", __FUNCTION__);
 		}
 		return -1;
 	}
 
 	httpHandler.SetKeepAliveTimeout( 60 * 1000 );	// keepalive timeout is 1 minutes.
 
+	// Register Service Handler
+	Service::UserSessionService sessionService;
+	httpHandler.RegisterServiceHandler(&sessionService, "/stallon/usersession");
+
 	// Start a REXDRServer
 	if ( false == httpHandler.StartListener() )
 	{
-		
+		if ( gLogger.IsFatalEnabled() )
+		{
+			gLogger.LogFormat(LL_FATAL, "%s: REXDR Listener NOT Started. Exit...\n", __FUNCTION__);
+		}		
 		return -1;
 	}
 

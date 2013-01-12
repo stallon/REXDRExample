@@ -1,4 +1,4 @@
-@request(GET, "/stallon/usersession/${userid:string}")
+@request(GET, "/stallon/usersession", userid=${userid})
 class QueryUserSessionStatus
 {
 
@@ -24,6 +24,7 @@ class UpdateUserSessionStatus
 	uint32_t sessionid;
 	string gameid;
 	string channelid;
+	uint32_t sessionstatus;
 	string reserve;
 };
 

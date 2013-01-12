@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include "../Common/Log4XWrapper.h"
-#include "REXDRServiceHandler.h"
 #include <REXDR/REXDRListenerAPI.h>
 #include <REXDR/REXDRDispatcherAPI.h>
 
@@ -26,6 +25,8 @@ namespace REXDRServer
 		// functions for Listener's internal properties
 		size_t GetKeepAliveTimeout() const;
 		void SetKeepAliveTimeout(size_t timeInMillisecond);
+
+		Common::Log4XWrapper* GetLogger() const;
 		void SetLogger(Common::Log4XWrapper* logger);
 
 
@@ -36,9 +37,7 @@ namespace REXDRServer
 		virtual void ProcessLinkDestroy(REXDR::Listener::Link::Handle link);
 
 		// dispatcher callback handlers
-		void RegisterServiceHandlerToDispatcher(REXDRServiceHandler* handler, const std::string& uri);
-		virtual void ProcessQuery(REXDR::Listener::Link::Handle link, const REXDR::MessageInfo& info, const REXDR::Request& req);
-		virtual void ProcessUpdate(REXDR::Listener::Link::Handle link, const REXDR::MessageInfo& info, const REXDR::Request& req);
+		void RegisterServiceHandler(REXDR::Dispatcher::IResourceHandler* handler, const std::string& uri);
 
 
 	private:
@@ -48,28 +47,6 @@ namespace REXDRServer
 		static void __stdcall OnRequestHandler(REXDR::Listener::Link::Handle link, const REXDR::MessageInfo& info, const REXDR::Request& req, void* context);
 		static void __stdcall OnLinkDestroyHandler(REXDR::Listener::Link::Handle link, void* context);
 
-/*
-		// dispatcher callbacks
-		static void __stdcall OnQueryUserSession(REXDR::Listener::Link::Handle link, const REXDR::MessageInfo& info, const REXDR::Request& req, void* context);
-		static void __stdcall OnUpdateUserSession(REXDR::Listener::Link::Handle link, const REXDR::MessageInfo& info, const REXDR::Request& req, void* context);
-
-		enum UserSessionStatus { SESSION_ACTIVE, SESSION_INACTIVE, SESSION_NOTEXIST };
-
-		typedef struct UserSessionInfo
-		{
-			std::string userid;
-			unsigned int sessionid;
-			std::string gameid;
-			std::string channelid;
-			UserSessionStatus status;
-		};
-
-		typedef std::map<std::string, UserSessionInfo*> UserSessionMap;
-		typedef std::map<std::string, UserSessionInfo*>::iterator UserSessionIterator;
-
-		UserSessionMap userlist_;
-		CRITICAL_SECTION userlistlock_;
-*/
 	private:
 		int id_;
 		REXDR::Listener::TransportType transportType_;
@@ -78,12 +55,6 @@ namespace REXDRServer
 		REXDR::Dispatcher::Handle dispatcher_;
 		Common::Log4XWrapper* logger_;
 		bool isListenerStopped;
-
-		// ServiceHandler Manager
-		typedef std::map<std::string, REXDRServiceHandler*> ServiceHandlerMap;
-		typedef std::map<std::string, REXDRServiceHandler*>::iterator ServiceHandlerIter;
-
-		ServiceHandlerMap serviceMap_;
 	};
 
 }	// end-of namespace

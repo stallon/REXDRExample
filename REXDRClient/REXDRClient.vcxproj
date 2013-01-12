@@ -150,7 +150,7 @@
     <None Include="..\Common\REXDR_CS_Messages.b" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Common\Helper.h" />
+    <ClInclude Include="..\Common\UTF8Converter.h" />
     <ClInclude Include="..\Common\Log4XWrapper.h" />
     <ClInclude Include="..\Common\REXDR_CS_Messages.h" />
     <ClInclude Include="ServiceHandler.h" />
@@ -158,7 +158,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Common\Helper.cpp">
+    <ClCompile Include="..\Common\UTF8Converter.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\Common\Log4XWrapper.cpp">

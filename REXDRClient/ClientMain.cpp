@@ -10,7 +10,7 @@
 #include "Log4XWrapper.h"
 
 
-#define SERVER_IP		"10.64.50.209"
+#define SERVER_IP		"127.0.0.1"
 #define SERVER_PORT		13403
 
 // Definitions for Log4XWrapper
@@ -77,7 +77,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			{
 				if ( gLogger.IsInfoEnabled() )
 				{
-					gLogger.LogFormat(Log4X::LogLevel::Info, "QueryUserSession FAILED for User(%s). REXDRClientHandler will be deleted.", userid.c_str());
+					gLogger.LogFormat(LL_INFO, "QueryUserSession FAILED for User(%s). REXDRClientHandler will be deleted.", userid.c_str());
 				}
 				delete handler;
 				break;
@@ -121,7 +121,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			{
 				if ( gLogger.IsInfoEnabled() )
 				{
-					gLogger.LogFormat(Log4X::LogLevel::Info, "UpdateUserSession FAILED for User(%s). REXDRClientHandler will be deleted.", userid.c_str());
+					gLogger.LogFormat(LL_INFO, "UpdateUserSession FAILED for User(%s). REXDRClientHandler will be deleted.", userid.c_str());
 				}
 				delete handler;
 				break;
